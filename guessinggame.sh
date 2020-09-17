@@ -2,27 +2,30 @@
 #File:guessinggame.sh
 
 count=0
+actual=$(ls -l | wc -l)
+let actual=$actual-1
+
 readcount(){
-echo "Guess how many files are in the current directory"
 read count
 }
-
-while [[ $count -ne 3 ]]
+echo "Guess how many files are in the current directory"
+while [[ $count -ne $actual ]]
 do
    readcount
-   if [[ $count -lt 3 || $count -gt 3 && $count -le 5 ]]
+   if [[ $count -lt $actual ]]
    then
-       echo "You are very close, guess again"
+       echo "This is very low,please guess again"
        continue
      
-   elif [[ $count -gt 5 ]]
+   elif [[ $count -gt $actual ]]
    then
-       echo "This is too high, guess again"
+       echo "This is too high,please guess again"
        continue
    fi
 done
 
-if [[ $count -eq 3 ]]
+if [[ $count -eq actual ]]
 then
    echo "Congratulations! You selected the right number"
 fi   
+  
